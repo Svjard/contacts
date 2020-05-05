@@ -9,6 +9,7 @@
 
 ## Schema
 
+```
 CREATE TABLE users (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(50),
@@ -193,6 +194,7 @@ CREATE TABLE user_contact_list (
     REFERENCES contact_list (id)
       ON UPDATE RESTRICT ON DELETE CASCADE
 );
+```
 
 ## Verification
 
@@ -251,7 +253,7 @@ Cloudwatch event runs once daily, any contact records soft deleted within the 14
 
 ## Mockups
 
-[Login]()
-[Lists]()
-[Search]()
-[Edit]()
+[Login](https://raw.githubusercontent.com/Svjard/contacts/master/.github/Login.png)
+[Lists](https://raw.githubusercontent.com/Svjard/contacts/master/.github/Lists.png)
+[Search](https://raw.githubusercontent.com/Svjard/contacts/master/.github/Search.png)
+[Edit](https://raw.githubusercontent.com/Svjard/contacts/master/.github/Edit.png)
