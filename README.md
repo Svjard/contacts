@@ -210,12 +210,13 @@ Cloudwatch event setup to kick off a Lambda, run once a day. Find contacts that 
 
   * Redis record: [contact id]: [user id] or [contact id/field]: [user id], will have a default TTL of 5mins on it so a user cannot lock the record/field forever. The frontend will be responsible for sending socket messages if the field blurs or user clicks Cancel/Save on the record or moves to another route to release the lock before the TTL.
 
-  * Could leverage a queue to let user request the lock even while another user 
+  * Could leverage a queue to let user request the lock even while another user has it, so a fair usage policy is in play.
 
 - Updates all done via transactions to the database record.
 
 ## API
 
+```
 GET /user (returns current authenticated user info)
 POST /user (user registration?)
 PUT /user (user profile update)
@@ -228,11 +229,13 @@ GET /contact/:id (specific contact)
 POST /contact
 PUT /contact/:id
 DELETE /contact/:id
+```
 
 ## Middleware
 
 - User authenticated done via JWT
 - User permissions/authorization
+    ```
     const { can, rules } = AbilityBuilder.extract();
     user.roles.forEach(role => {
       role.permissions.forEach(permission => {
@@ -241,8 +244,9 @@ DELETE /contact/:id
     });
 
     user.rbac = new Ability(rules);
+    ```
   
-  - middleware per route such as, rbac.authorize(['view','contact'])
+  - middleware per route such as, ```rbac.authorize(['view','contact'])```
 
   - constraints processed at the validation level of the request
     - i.e. if user can only edit the contacts first and last name the validation 
